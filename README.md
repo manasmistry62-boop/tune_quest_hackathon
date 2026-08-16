@@ -1,41 +1,207 @@
-# tune_quest_hackathon
-Hackathon on fine tuning of local weak LLM to  predict semantic correctness of two given code 
+---
+base_model: google/gemma-3-1b-it
+library_name: peft
+pipeline_tag: text-generation
+tags:
+- base_model:adapter:google/gemma-3-1b-it
+- lora
+- transformers
+---
+
+# Model Card for Model ID
+
+<!-- Provide a quick summary of what the model is/does. -->
 
 
-# 🚀 Cross-Language Code Equivalence Detection using Gemma-3
 
-**AI Club Hackathon Project**
+## Model Details
 
-This repository contains the code and fine-tuned model for detecting semantic equivalence between code snippets. Built using Google's **Gemma-3-1b-it**, the model evaluates pairs of source code (Python-Python, Java-Java, and Python-Java) and predicts whether they implement the same underlying logic (`Equivalent` or `Not Equivalent`).
+### Model Description
 
-## 🌟 Key Highlights
-* **Resource-Constrained Training:** Successfully fine-tuned a 1-Billion parameter LLM on a consumer-grade GPU (NVIDIA RTX 3050 with 6GB VRAM) without encountering OOM crashes.
-* **Incremental Training Pipeline:** Utilized a multi-stage, incremental learning approach to continuously improve the model's F1-score across large datasets.
-* **Leakage-Free Validation:** Implemented strict data stratification and leakage-prevention split strategies to ensure robust and authentic validation metrics.
+<!-- Provide a longer summary of what this model is. -->
 
-## 🛠️ Tech Stack & Optimizations
-* **Model:** `google/gemma-3-1b-it`
-* **Frameworks:** PyTorch, Hugging Face `transformers`, `peft`, `datasets`
-* **Quantization:** 4-bit NormalFloat (NF4) via `bitsandbytes`
-* **Fine-Tuning Method:** QLoRA (Quantized Low-Rank Adaptation)
-* **Memory Optimizations:** 
-  * `gradient_checkpointing=True`
-  * `optim="paged_adamw_8bit"` (to handle memory spikes)
-  * Left-padding for optimized batch generation.
 
-## 📊 Dataset & Preprocessing
-The dataset consists of code pairs across multiple languages. Key preprocessing steps included:
-1. **Deduplication & Stratification:** Ensured that functions present in the training set did not leak into the validation set.
-2. **Prompt Engineering:** Structured the inputs into strict system/user chat templates optimal for Gemma-3's instruction-tuned architecture.
-3. **Target Formatting:** Model was trained to generate concise classification tokens (e.g., yielding "equivalent" or "not equivalent").
 
-## 📈 Results
-The model was evaluated using the **F1-Score** to handle any class imbalances in the equivalence dataset. 
-* **Baseline F1-Score:** ~0.8964
-* **Performance Breakdown:** Maintained consistent accuracy across identical (`python-python`, `java-java`) and cross-language (`java-python`) pairs. *(Update your final round 2 F1 score here!)*
+- **Developed by:** [More Information Needed]
+- **Funded by [optional]:** [More Information Needed]
+- **Shared by [optional]:** [More Information Needed]
+- **Model type:** [More Information Needed]
+- **Language(s) (NLP):** [More Information Needed]
+- **License:** [More Information Needed]
+- **Finetuned from model [optional]:** [More Information Needed]
 
-## 🚀 How to Run (Inference)
+### Model Sources [optional]
 
-### 1. Install Dependencies
-```bash
-pip install torch transformers peft bitsandbytes accelerate scikit-learn
+<!-- Provide the basic links for the model. -->
+
+- **Repository:** [More Information Needed]
+- **Paper [optional]:** [More Information Needed]
+- **Demo [optional]:** [More Information Needed]
+
+## Uses
+
+<!-- Address questions around how the model is intended to be used, including the foreseeable users of the model and those affected by the model. -->
+
+### Direct Use
+
+<!-- This section is for the model use without fine-tuning or plugging into a larger ecosystem/app. -->
+
+[More Information Needed]
+
+### Downstream Use [optional]
+
+<!-- This section is for the model use when fine-tuned for a task, or when plugged into a larger ecosystem/app -->
+
+[More Information Needed]
+
+### Out-of-Scope Use
+
+<!-- This section addresses misuse, malicious use, and uses that the model will not work well for. -->
+
+[More Information Needed]
+
+## Bias, Risks, and Limitations
+
+<!-- This section is meant to convey both technical and sociotechnical limitations. -->
+
+[More Information Needed]
+
+### Recommendations
+
+<!-- This section is meant to convey recommendations with respect to the bias, risk, and technical limitations. -->
+
+Users (both direct and downstream) should be made aware of the risks, biases and limitations of the model. More information needed for further recommendations.
+
+## How to Get Started with the Model
+
+Use the code below to get started with the model.
+
+[More Information Needed]
+
+## Training Details
+
+### Training Data
+
+<!-- This should link to a Dataset Card, perhaps with a short stub of information on what the training data is all about as well as documentation related to data pre-processing or additional filtering. -->
+
+[More Information Needed]
+
+### Training Procedure
+
+<!-- This relates heavily to the Technical Specifications. Content here should link to that section when it is relevant to the training procedure. -->
+
+#### Preprocessing [optional]
+
+[More Information Needed]
+
+
+#### Training Hyperparameters
+
+- **Training regime:** [More Information Needed] <!--fp32, fp16 mixed precision, bf16 mixed precision, bf16 non-mixed precision, fp16 non-mixed precision, fp8 mixed precision -->
+
+#### Speeds, Sizes, Times [optional]
+
+<!-- This section provides information about throughput, start/end time, checkpoint size if relevant, etc. -->
+
+[More Information Needed]
+
+## Evaluation
+
+<!-- This section describes the evaluation protocols and provides the results. -->
+
+### Testing Data, Factors & Metrics
+
+#### Testing Data
+
+<!-- This should link to a Dataset Card if possible. -->
+
+[More Information Needed]
+
+#### Factors
+
+<!-- These are the things the evaluation is disaggregating by, e.g., subpopulations or domains. -->
+
+[More Information Needed]
+
+#### Metrics
+
+<!-- These are the evaluation metrics being used, ideally with a description of why. -->
+
+[More Information Needed]
+
+### Results
+
+[More Information Needed]
+
+#### Summary
+
+
+
+## Model Examination [optional]
+
+<!-- Relevant interpretability work for the model goes here -->
+
+[More Information Needed]
+
+## Environmental Impact
+
+<!-- Total emissions (in grams of CO2eq) and additional considerations, such as electricity usage, go here. Edit the suggested text below accordingly -->
+
+Carbon emissions can be estimated using the [Machine Learning Impact calculator](https://mlco2.github.io/impact#compute) presented in [Lacoste et al. (2019)](https://arxiv.org/abs/1910.09700).
+
+- **Hardware Type:** [More Information Needed]
+- **Hours used:** [More Information Needed]
+- **Cloud Provider:** [More Information Needed]
+- **Compute Region:** [More Information Needed]
+- **Carbon Emitted:** [More Information Needed]
+
+## Technical Specifications [optional]
+
+### Model Architecture and Objective
+
+[More Information Needed]
+
+### Compute Infrastructure
+
+[More Information Needed]
+
+#### Hardware
+
+[More Information Needed]
+
+#### Software
+
+[More Information Needed]
+
+## Citation [optional]
+
+<!-- If there is a paper or blog post introducing the model, the APA and Bibtex information for that should go in this section. -->
+
+**BibTeX:**
+
+[More Information Needed]
+
+**APA:**
+
+[More Information Needed]
+
+## Glossary [optional]
+
+<!-- If relevant, include terms and calculations in this section that can help readers understand the model or model card. -->
+
+[More Information Needed]
+
+## More Information [optional]
+
+[More Information Needed]
+
+## Model Card Authors [optional]
+
+[More Information Needed]
+
+## Model Card Contact
+
+[More Information Needed]
+### Framework versions
+
+- PEFT 0.20.0
